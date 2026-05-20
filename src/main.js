@@ -107,14 +107,26 @@ consultingForm?.addEventListener('submit', async (e) => {
   submitBtn.disabled = true;
 
   try {
-    // 백엔드 API로 데이터 전송 (현재는 테스트용 가짜 API 주소를 사용합니다)
-    // 실제 서버가 준비되면 아래 URL을 실제 백엔드 API 엔드포인트로 변경하세요.
-    const API_URL = 'https://jsonplaceholder.typicode.com/posts';
+    // 💡 Formspree 이메일 연동 (무료)
+    // 1. https://formspree.io/ 에 가입 후 새 Form을 만듭니다.
+    // 2. 발급받은 Endpoint URL을 아래 API_URL에 붙여넣습니다. (예: 'https://formspree.io/f/mvoeqqab')
+    const API_URL = '여기에_FORMSPREE_주소를_입력하세요';
     
-    const response = await axios.post(API_URL, formData);
+    if (API_URL === '여기에_FORMSPREE_주소를_입력하세요') {
+      alert('알림: 개발자 모드입니다. 코드(src/main.js)를 열어 Formspree 주소를 먼저 입력해 주세요!');
+      submitBtn.innerText = '현실로 만들기';
+      submitBtn.disabled = false;
+      return;
+    }
+
+    const response = await axios.post(API_URL, formData, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
     
-    console.log('✅ [서버 응답 성공]:', response.data);
-    alert(`[${userName}님] 데이터 전송 성공!\n서버에서 정상적으로 접수되었습니다. (상태코드: ${response.status})`);
+    console.log('✅ [이메일 전송 성공]:', response.data);
+    alert(`[${userName}님] 데이터 전송 완료!\n입력하신 정보가 담당자 이메일로 안전하게 전달되었습니다.`);
     
     // 폼 초기화
     consultingForm.reset();
