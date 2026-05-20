@@ -110,7 +110,7 @@ consultingForm?.addEventListener('submit', async (e) => {
     // 💡 Formspree 이메일 연동 (무료)
     // 1. https://formspree.io/ 에 가입 후 새 Form을 만듭니다.
     // 2. 발급받은 Endpoint URL을 아래 API_URL에 붙여넣습니다. (예: 'https://formspree.io/f/mvoeqqab')
-    const API_URL = '여기에_FORMSPREE_주소를_입력하세요';
+    const API_URL = 'https://formspree.io/f/mwvzvjpb';
     
     if (API_URL === '여기에_FORMSPREE_주소를_입력하세요') {
       alert('알림: 개발자 모드입니다. 코드(src/main.js)를 열어 Formspree 주소를 먼저 입력해 주세요!');
