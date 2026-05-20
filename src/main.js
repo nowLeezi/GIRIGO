@@ -1,4 +1,5 @@
 import './style.css'
+import axios from 'axios';
 
 // Intersection Observer for Scroll Animations
 const observerOptions = {
@@ -82,18 +83,51 @@ tags.forEach(tag => {
 
 // Form Submission
 const consultingForm = document.getElementById('consulting-form');
-consultingForm?.addEventListener('submit', (e) => {
+consultingForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const submitBtn = consultingForm.querySelector('button[type="submit"]');
-  submitBtn.innerText = '전송 중...';
+  
+  // 데이터 수집
+  const userName = document.getElementById('user-name').value;
+  const userAge = document.getElementById('user-age').value;
+  const userPhone = document.getElementById('user-phone').value;
+  const selectedTags = Array.from(document.querySelectorAll('.select-tag.active')).map(tag => tag.innerText);
+  const userWish = document.getElementById('wish-input')?.value || '';
+
+  const formData = {
+    name: userName,
+    age: userAge,
+    phone: userPhone,
+    interests: selectedTags,
+    wish: userWish,
+    submittedAt: new Date().toISOString()
+  };
+
+  submitBtn.innerText = '서버로 전송 중...';
   submitBtn.disabled = true;
 
-  setTimeout(() => {
-    alert('당신의 소원이 현실로 향하고 있습니다. 곧 연락드리겠습니다.');
-    submitBtn.innerText = '신청 완료';
+  try {
+    // 백엔드 API로 데이터 전송 (현재는 테스트용 가짜 API 주소를 사용합니다)
+    // 실제 서버가 준비되면 아래 URL을 실제 백엔드 API 엔드포인트로 변경하세요.
+    const API_URL = 'https://jsonplaceholder.typicode.com/posts';
+    
+    const response = await axios.post(API_URL, formData);
+    
+    console.log('✅ [서버 응답 성공]:', response.data);
+    alert(`[${userName}님] 데이터 전송 성공!\n서버에서 정상적으로 접수되었습니다. (상태코드: ${response.status})`);
+    
+    // 폼 초기화
     consultingForm.reset();
     tags.forEach(t => t.classList.remove('active'));
-  }, 2000);
+    
+  } catch (error) {
+    console.error('❌ [서버 전송 에러]:', error);
+    alert('서버 전송 중 오류가 발생했습니다. 다시 시도해주세요.');
+  } finally {
+    // 버튼 원상복구
+    submitBtn.innerText = '현실로 만들기';
+    submitBtn.disabled = false;
+  }
 });
 
 // Success Story Auto-Slider

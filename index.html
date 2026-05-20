@@ -15,12 +15,7 @@
       <section id="hero">
         <div class="container" style="text-align: center;">
           <div class="main-icon">
-            <svg viewBox="0 0 100 100" width="80" height="80" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square">
-              <!-- Geometric Praying Hands -->
-              <path d="M50 20 L35 70 L50 85 L65 70 Z" stroke-width="1.5" fill="rgba(255,255,255,0.05)"></path>
-              <path d="M50 20 L42 60 L50 75 L58 60 Z" stroke-width="1"></path>
-              <!-- Dither effect filter will be applied in CSS -->
-            </svg>
+            <img src="/1.png" alt="GIRIGO No Text Logo" style="width: 180px; height: 180px; object-fit: cover; border-radius: 50%; mix-blend-mode: screen; mask-image: radial-gradient(circle, black 50%, transparent 100%); -webkit-mask-image: radial-gradient(circle, black 50%, transparent 100%);" />
           </div>
           <h1 class="hero-copy">당신은 지금,<br>무엇을 간절히 바라고 있나요?</h1>
           <p class="sub-copy">취업, 이직, AI 커리어 전환…<br>당신의 목표를 기록해보세요.</p>
@@ -91,15 +86,15 @@
             <form id="consulting-form">
               <div class="input-group">
                 <label>이름</label>
-                <input type="text" class="form-input" placeholder="이름을 입력하세요" required />
+                <input type="text" id="user-name" class="form-input" placeholder="이름을 입력하세요" required />
               </div>
               <div class="input-group">
                 <label>나이</label>
-                <input type="number" class="form-input" placeholder="나이를 입력하세요" required />
+                <input type="number" id="user-age" class="form-input" placeholder="나이를 입력하세요" required />
               </div>
               <div class="input-group">
                 <label>연락처</label>
-                <input type="tel" class="form-input" placeholder="010-0000-0000" required />
+                <input type="tel" id="user-phone" class="form-input" placeholder="010-0000-0000" required />
               </div>
               <div class="input-group">
                 <label>관심 분야 (중복 선택 가능)</label>
